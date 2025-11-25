@@ -1,1 +1,6 @@
+# Linguagens principais
+*.dax linguist-language=DAX
+*.m   linguist-language=M
 
+# Ignorar arquivos HTML, se houver muitos, para não dominar as estatísticas
+*.html  linguist-vendored
