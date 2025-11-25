@@ -1,0 +1,50 @@
+# Measures example:
+
+Encounter:
+
+AverageCost = AVERAGE(f_encounters[TOTAL_CLAIM_COST])
+
+LY = CALCULATE(
+    [Total claim],
+    DATEADD(
+        Calendario[Datas],
+        -1,
+        YEAR
+    ))
+
+TotalReadmited = 
+CALCULATE(
+    DISTINCTCOUNT(f_encounters[Id]),
+    FILTER(d_procedures,
+    d_procedures[TotalProceduresPerPatient] > 1)
+    
+    )
+
+
+Patient:
+
+Average LOS = 
+AVERAGEX(
+    f_encounters,
+    DATEDIFF(f_encounters[START],f_encounters[STOP],DAY
+    ))
+
+maxDuration = MAXX(
+    f_encounters,
+    DATEDIFF(f_encounters[START],f_encounters[STOP],DAY)
+)
+
+
+Procedures:
+
+ContagemProcedures = COUNTROWS(d_procedures)
+
+LYProcedures = CALCULATE(
+    [ContagemProcedures],
+    DATEADD(
+        Calendario[Datas],
+        -1,
+        YEAR
+    ))
+
+CountSim = CALCULATE(COUNTROWS(d_procedures), 'd_procedures'[Covered] = "YES")
